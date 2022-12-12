@@ -40,11 +40,12 @@ app.delete("/delete/:id", (req, res) =>{
         }
      })
 })
-app.delete("/update/:id", (req, res) =>{
-    const products = req.params.id
-    const sqlDelete = 
-     "DELETE FROM inventory_table WHERE id = ?";
-     db.query(sqlDelete, products, (err,result) => {
+app.put("/update", (req, res) =>{
+    const id = req.body.id
+    const product_price = req.body.product_price;
+    const sqlUpdate = 
+     "UPDATE  inventory_table SET  product_price = ? WHERE id = ?";
+     db.query(sqlUpdate, [product_price, id], (err,result) => {
         if(err){
             console.log(err)
         }
@@ -52,6 +53,7 @@ app.delete("/update/:id", (req, res) =>{
             console.log(result)
         }
      })
+     
 })
  app.post("/create", (req,res) => {
      const product_name = req.body.product_name;
